@@ -129,6 +129,12 @@ variable "devel" {
   default     = null
 }
 
+variable "release_name" {
+  type = string
+  description = "Release name to be used. If empty, the release"
+  default = null
+}
+
 variable "repository" {
   type        = string
   description = "Repository URL where to locate the requested chart."
