@@ -18,7 +18,7 @@ module "eks_iam_policy" {
 
 module "eks_iam_role" {
   source  = "cloudposse/eks-iam-role/aws"
-  version = "0.11.0"
+  version = "0.11.1"
 
   enabled = local.iam_role_enabled
 
@@ -99,7 +99,7 @@ resource "helm_release" "this" {
   dynamic "set" {
     for_each = local.iam_role_enabled && var.service_account_role_arn_annotation_enabled ? [module.eks_iam_role.service_account_role_arn] : []
     content {
-      name  = format("%s.annotations.eks\\.amazonaws\\.com/role-arn", var.service_account_set_key_path)
+      name  = var.service_account_set_key_path
       value = set.value
       type  = "string"
     }
